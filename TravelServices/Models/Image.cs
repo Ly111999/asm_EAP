@@ -14,19 +14,19 @@ namespace TravelServices.Models
     
     public partial class Image
     {
-        private string name1;
-        private string name2;
-        private DateTime now1;
-        private DateTime now2;
+        public Image()
+        {
 
-        public Image(string url, string name1, string name2, int id, DateTime now1, DateTime now2)
+        }
+
+        public Image(string url, string name, string description, int id, DateTime createdAt, DateTime updatedAt)
         {
             this.url = url;
-            this.name1 = name1;
-            this.name2 = name2;
+            this.name = name;
+            this.description = description;
             this.id = id;
-            this.now1 = now1;
-            this.now2 = now2;
+            this.createdAt = createdAt;
+            this.updatedAt = updatedAt;
         }
 
         public int id { get; set; }

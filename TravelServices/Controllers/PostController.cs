@@ -61,7 +61,7 @@ namespace TravelServices.Controllers
             }
 
 
-            return Request.CreateResponse(HttpStatusCode.OK, currentPost);
+            return Request.CreateResponse(HttpStatusCode.OK, "Add post success");
         }
 
         [Route("post")]
@@ -71,7 +71,7 @@ namespace TravelServices.Controllers
             return db.Posts.ToList();
         }
 
-        [Route("post/{Traveler_id}")]
+        [Route("post/travel/{Traveler_id}")]
         [HttpGet]
         public List<Post> GetAllGuidePosts(int Traveler_id)
         {
@@ -82,7 +82,7 @@ namespace TravelServices.Controllers
         [HttpGet]
         public HttpResponseMessage GetPostsById(int id)
         {
-            Post post = db.Posts.Where(a => a.id == id).FirstOrDefault();
+            Post post = db.Posts.FirstOrDefault(a => a.id == id);
             if (post == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Post not found.");
@@ -111,6 +111,8 @@ namespace TravelServices.Controllers
 
             try
             {
+                post.createdAt = DateTime.Now;
+                post.updatedAt = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
